@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Sentimen Teks RNN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container-custom {
+            max-width: 700px;
+            width: 100%;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+        }
+        .card-header {
+            background-color: #007bff; /* Primary blue header */
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .result-box {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .result-label {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .result-value {
+            font-weight: bold;
+            font-size: 2.2em;
+            text-transform: uppercase;
+        }
+        .positif .result-value {
+            color: #28a745; /* Green for Positif */
+        }
+        .negatif .result-value {
+            color: #dc3545; /* Red for Negatif */
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-custom">
+        <div class="card">
+            <div class="card-header">
+                Analisis Sentimen Teks
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-4">
+                        <label for="text" class="form-label">Masukkan teks yang ingin dianalisis:</label>
+                        <textarea class="form-control" id="text" name="text" required autofocus>{{ user_text }}</textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Analisis Sentimen
+                        </button>
+                    </div>
+                </form>
+            <br>
+                <p style="color: red">*Note : Text harus sesuai yang ada di dalam dataset.csv</p>
+
+                {% if result %}
+                <div class="result-box mt-5 {{ result|lower }}">
+                    <div class="result-label">Hasil Analisis Sentimen:</div>
+                    <div class="result-value">
+                        {{ result }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigSs/r+6pLxhL+EaQZ3U" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-..." crossorigin="anonymous"></script>
+</body>
+</html>
